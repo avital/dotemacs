@@ -1,6 +1,6 @@
 (add-to-list 'load-path "~/.emacs.d/lisp/")
 (add-to-list 'load-path "~/.emacs.d/color-theme-6.6.0/")
-(add-to-list 'load-path "~/.emacs.d/expand-region.el/")
+(add-to-list 'load-path "~/.emacs.d/expand-region/")
 
 (defun region-active-p ()
    "Return t if Transient Mark mode is enabled and the mark is active."
