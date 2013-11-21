@@ -1,6 +1,9 @@
 (add-to-list 'load-path "~/.emacs.d/lisp/")
 (add-to-list 'load-path "~/.emacs.d/color-theme-6.6.0/")
 (add-to-list 'load-path "~/.emacs.d/expand-region/")
+(add-to-list 'load-path "~/.emacs.d/handlebars/")
+
+(setq package-archives '(("ELPA" . "http://tromey.com/elpa/") ("gnu" . "http://elpa.gnu.org/packages/") ("marmalade" . "http://marmalade-repo.org/packages/") ("melpa" . "http://melpa.milkbox.net/packages/")))
 
 (defun region-active-p ()
    "Return t if Transient Mark mode is enabled and the mark is active."
@@ -8,6 +11,7 @@
 
 (require 'color-theme)
 (require 'expand-region)
+(require 'handlebars-sgml-hacks)
 (global-set-key (kbd "M-=") 'er/expand-region)
 
 (color-theme-initialize)
@@ -33,3 +37,9 @@
 
 (setq-default indent-tabs-mode nil)
 (setq-default show-trailing-whitespace t)
+
+(defun pop-mark-set-point (n)
+"Pop a mark off the stack, and go to the corresponding point. With prefix arg n, do it n times."
+(interactive "p")
+(if (>= n 1) (pop-mark-set-point (1- n)) (set-mark-command t)))
+(define-key ctl-x-map "p" 'pop-mark-set-point)
