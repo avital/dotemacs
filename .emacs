@@ -11,7 +11,7 @@
 
 (require 'color-theme)
 (require 'expand-region)
-(require 'handlebars-sgml-hacks)
+;; (require 'handlebars-sgml-hacks)
 (global-set-key (kbd "M-=") 'er/expand-region)
 
 (color-theme-initialize)
@@ -43,3 +43,28 @@
 (interactive "p")
 (if (>= n 1) (pop-mark-set-point (1- n)) (set-mark-command t)))
 (define-key ctl-x-map "p" 'pop-mark-set-point)
+
+
+(add-to-list 'auto-mode-alist '("\\.jsx$" . web-mode))
+(defadvice web-mode-highlight-part (around tweak-jsx activate)
+  (if (equal web-mode-content-type "jsx")
+      (let ((web-mode-enable-part-face nil))
+        ad-do-it)
+    ad-do-it))
+
+(autoload 'octave-mode "octave-mod" nil t)
+(setq auto-mode-alist
+      (cons '("\\.m$" . octave-mode) auto-mode-alist))
+
+(add-hook 'octave-mode-hook
+          (lambda ()
+            (abbrev-mode 1)
+            (auto-fill-mode 1)
+            (if (eq window-system 'x)
+                (font-lock-mode 1))))
+
+
+(add-hook 'coffee-mode-hook
+          (lambda ()
+            (set (make-local-variable 'tab-width) 2)
+            (set (make-local-variable 'indent-tabs-mode) t)))

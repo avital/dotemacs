@@ -1,0 +1,21 @@
+ls -al
+./stalk.sh 
+ls -al
+cd underscore
+bash
+cd ..
+ls -al
+mv stash.sh clone.sh
+ls -al
+ls *.sh
+mv stash.sh clone.sh
+mv stalk.sh clone.sh
+ls -al
+ls -al
+ls -al
+la -l
+ls -al
+cd ycssmin/
+ls -l
+git log --stat
+bash
